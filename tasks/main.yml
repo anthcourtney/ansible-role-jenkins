@@ -1,5 +1,21 @@
 ---
 
+- name: Add apt key
+  apt_key:
+    url: "https://pkg.jenkins.io/debian/jenkins.io.key"
+    state: present
+  tags:
+    - jenkins
+    - jenkins-install
+
+- name: Configure apt repository
+  apt_repository:
+    repo: deb https://pkg.jenkins.io/debian binary/
+    state: present
+  tags:
+    - jenkins
+    - jenkins-install
+
 - name: Install jenkins
   package:
     name: jenkins
